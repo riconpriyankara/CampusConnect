@@ -1,0 +1,276 @@
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--navbar-height);
+  background-color: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  transition: background-color var(--transition-normal);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-toggle {
+  display: none !important;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+.menu-toggle:hover {
+  background: var(--color-border);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-text);
+  cursor: pointer;
+  letter-spacing: -0.015em;
+}
+.navbar-logo .logo-accent {
+  color: var(--signal);
+}
+
+.navbar-search {
+  position: relative;
+  width: 340px;
+}
+.navbar-search-input {
+  width: 100%;
+  padding: 0.45rem 1rem 0.45rem 2.25rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  font-size: 0.8125rem;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  outline: none;
+}
+.navbar-search-input:focus {
+  border-color: var(--signal);
+  box-shadow: 0 0 0 3px var(--signal-tint);
+}
+.navbar-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-icon-btn {
+  position: relative;
+  cursor: pointer;
+  padding: 0.45rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  color: var(--color-text-muted);
+}
+.nav-icon-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background-color: var(--signal);
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-bg-card);
+}
+
+/* User Dropdown */
+.nav-profile {
+  position: relative;
+}
+.nav-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+.nav-profile-trigger:hover {
+  background: var(--color-bg);
+  border-color: var(--color-border);
+}
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+}
+.nav-profile-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.nav-profile-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+.nav-profile-dept {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Common Dropdown Panel Styling */
+.dropdown-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 280px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInRight var(--transition-fast) forwards;
+  z-index: 120;
+}
+
+.dropdown-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-header h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+.dropdown-clear-btn {
+  font-size: 0.7rem;
+  color: var(--color-secondary);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dropdown-list {
+  max-height: 240px;
+  overflow-y: auto;
+}
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  text-align: left;
+  font-size: 0.7875rem;
+}
+.dropdown-item:hover {
+  background-color: var(--color-bg);
+}
+.dropdown-item.unread {
+  background-color: rgba(var(--color-primary-rgb), 0.03);
+}
+.dropdown-item-content p {
+  line-height: 1.35;
+  margin-bottom: 0.2rem;
+}
+.dropdown-item-time {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.dropdown-footer {
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+.dropdown-footer:hover {
+  color: var(--color-primary);
+}
+
+/* Profile Dropdown Panel Specifics */
+.profile-panel {
+  width: 180px;
+}
+.profile-panel-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  transition: background var(--transition-fast);
+}
+.profile-panel-item:hover {
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: inline-flex !important;
+  }
+  .navbar-logo span {
+    display: none;
+  }
+  .navbar-search {
+    display: none;
+  }
+  .nav-profile-info {
+    display: none;
+  }
+}
+/* navbar branding is standard text branding */

@@ -1,0 +1,158 @@
+/* Admin Moderation CSS */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+.stats-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-widget {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.stat-widget-details h4 {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.stat-widget-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl); /* Large mono numeric readout */
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.admin-main-section {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
+}
+
+.admin-list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-list-panel h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Mod table structures */
+.admin-table-wrapper {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+.admin-table th {
+  background-color: var(--paper);
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  border-bottom: 1.5px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+}
+
+.admin-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  color: var(--ink);
+}
+
+.admin-table tr:hover td {
+  background-color: var(--paper);
+}
+
+.admin-stamp-btn {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem !important;
+  border-radius: var(--radius-sm) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all var(--transition-fast);
+  border: 1px solid var(--line);
+  background-color: var(--surface);
+  color: var(--ink-muted);
+}
+.admin-stamp-btn:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.admin-stamp-btn-resolve {
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+  background-color: var(--surface);
+}
+.admin-stamp-btn-resolve:hover {
+  background-color: var(--color-success);
+  color: var(--surface);
+}
+
+.admin-stamp-btn-danger {
+  color: var(--signal);
+  border: 1px solid var(--signal);
+  background-color: var(--surface);
+}
+.admin-stamp-btn-danger:hover {
+  background-color: var(--signal);
+  color: var(--surface);
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.reported-reason-text {
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  font-style: italic;
+  max-width: 200px;
+  line-break: anywhere;
+}
+
+@media (max-width: 1024px) {
+  .admin-main-section {
+    grid-template-columns: 1fr;
+  }
+}
