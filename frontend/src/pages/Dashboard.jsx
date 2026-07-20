@@ -116,52 +116,17 @@ const Dashboard = () => {
     );
   }
 
-  const userDept = getDeptCode(user?.department) || 'CHEM';
-  const userYear = user?.year || 2;
   const userName = user?.name ? user.name.split(' ')[0] : 'Student';
+  const userDept = user?.department || 'Information Technology';
+  const userYear = user?.year || 1;
 
-  const quickSummaryItems = [
-    {
-      id: 'doubts',
-      count: doubts.filter((d) => !d.acceptedAnswer).length || 2,
-      label: 'Academic Doubts',
-      sublabel: 'Unanswered questions',
-      icon: ChatsCircle,
-      path: '/doubts',
-      accentColor: 'var(--cat-doubts)',
-      bgColor: 'rgba(106, 79, 179, 0.15)',
-    },
-    {
-      id: 'events',
-      count: events.length || 1,
-      label: 'Campus Events',
-      sublabel: 'Happening this week',
-      icon: CalendarBlank,
-      path: '/events',
-      accentColor: 'var(--cat-events)',
-      bgColor: 'rgba(46, 125, 83, 0.15)',
-    },
-    {
-      id: 'books',
-      count: 3,
-      label: 'Marketplace Deals',
-      sublabel: 'Price drops & listings',
-      icon: ShoppingBag,
-      path: '/books',
-      accentColor: 'var(--cat-books)',
-      bgColor: 'rgba(199, 125, 34, 0.15)',
-    },
-    {
-      id: 'notes',
-      count: notes.length || 4,
-      label: 'Course Handouts',
-      sublabel: `${userDept} Year ${userYear}`,
-      icon: BookOpen,
-      path: '/notes',
-      accentColor: 'var(--cat-notes)',
-      bgColor: 'rgba(47, 95, 166, 0.15)',
-    },
-  ];
+  const getTimeBasedGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'Good morning';
+    if (hour >= 12 && hour < 17) return 'Good afternoon';
+    if (hour >= 17 && hour < 21) return 'Good evening';
+    return 'Welcome back';
+  };
 
   return (
     <div className="dashboard-container animate-fade">
@@ -175,59 +140,23 @@ const Dashboard = () => {
           />
           <div className="cool-hero-overlay-gradient"></div>
           <div className="cool-hero-grid-pattern"></div>
+          <div className="cool-hero-bottom-fade"></div>
         </div>
 
         <div className="cool-hero-content-wrapper">
           <div className="cool-hero-text-col">
-            <h1 className="cool-hero-headline">
-              Welcome back, <span className="cool-hero-highlight">{userName}</span>
+            <div className="hero-personalization-badge animate-hero-fade-0">
+              <GraduationCap size={13} weight="bold" />
+              <span>{userDept} · Year {userYear}</span>
+            </div>
+
+            <h1 className="cool-hero-headline animate-hero-fade-1">
+              {getTimeBasedGreeting()}, <span className="cool-hero-highlight">{userName}</span>
             </h1>
 
-            <p className="cool-hero-subtitle">
+            <p className="cool-hero-subtitle animate-hero-fade-2">
               Your real-time hub for academic doubts, course handouts, marketplace deals, and campus events.
             </p>
-          </div>
-
-          <div className="cool-hero-cards-grid">
-            {quickSummaryItems.map((item) => {
-              const IconComponent = item.icon;
-              return (
-                <div
-                  key={item.id}
-                  className="cool-hero-glass-card"
-                  onClick={() => navigate(item.path)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      navigate(item.path);
-                    }
-                  }}
-                  style={{ '--card-accent': item.accentColor }}
-                >
-                  <div
-                    className="cool-hero-card-icon"
-                    style={{ backgroundColor: item.bgColor, color: item.accentColor }}
-                  >
-                    <IconComponent size={18} weight="bold" />
-                  </div>
-                  <div className="cool-hero-card-info">
-                    <div className="cool-hero-card-header">
-                      <span className="cool-hero-card-label">{item.label}</span>
-                      <span
-                        className="cool-hero-card-count"
-                        style={{ backgroundColor: item.bgColor, color: item.accentColor }}
-                      >
-                        {item.count}
-                      </span>
-                    </div>
-                    <span className="cool-hero-card-sublabel">{item.sublabel}</span>
-                  </div>
-                  <ArrowRight size={13} weight="bold" className="cool-hero-card-arrow" />
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>
@@ -467,10 +396,6 @@ const Dashboard = () => {
                     <div className="book-mini-details">
                       <div>
                         <h3 className="book-mini-title">{book.title}</h3>
-                        <div className="book-mini-meta-row">
-                          <span className="book-mini-condition">{book.condition}</span>
-                          <span className="book-mini-seller">by {book.soldBy?.name ? book.soldBy.name.split(' ')[0] : 'Student'}</span>
-                        </div>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.4rem' }}>
                         <span className="book-mini-price">₹{book.price}</span>
