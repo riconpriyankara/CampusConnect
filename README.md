@@ -12,22 +12,22 @@
 
 ---
 
-## 📌 About The Project
+## About The Project
 
 CampusConnect was created to address a common problem in university campuses: course materials are scattered across random group chats, finding used textbooks requires asking around manually, and course questions get lost in busy messaging threads.
 
 This project brings all core academic activities into one organized platform categorized by department and semester.
 
 ### What it does:
-- 📄 **Notes Sharing**: Upload and download PDF handouts and past papers filtered by department and semester.
-- 📚 **Book Marketplace**: List second-hand textbooks for sale, mark items as available or sold, and contact sellers directly.
-- 💬 **Doubt Forum**: Ask course questions, post answers, upvote helpful responses, and mark accepted answers.
-- 🗓️ **Campus Events**: Discover upcoming hackathons, guest lectures, and student activities with location details and calendar bookmarks.
-- 🛡️ **Admin Panel**: Review flagged content reports, purge policy-violating listings, and manage user accounts.
+- **Notes Sharing**: Upload and download PDF handouts and past papers filtered by department and semester.
+- **Book Marketplace**: List second-hand textbooks for sale, mark items as available or sold, and contact sellers directly.
+- **Doubt Forum**: Ask course questions, post answers, upvote helpful responses, and mark accepted answers.
+- **Campus Events**: Discover upcoming hackathons, guest lectures, and student activities with location details and calendar bookmarks.
+- **Admin Panel**: Review flagged content reports, purge policy-violating listings, and manage user accounts.
 
 ---
 
-## 🖼️ Screenshots
+## Screenshots
 
 | Dashboard Overview | Notes Sharing Library |
 | :---: | :---: |
@@ -55,7 +55,7 @@ This project brings all core academic activities into one organized platform cat
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 graph TD
@@ -70,7 +70,7 @@ graph TD
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Framework**: React 18 (Vite)
@@ -88,7 +88,7 @@ graph TD
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18 or higher)
@@ -137,7 +137,7 @@ npm run dev
 
 ---
 
-## 🔑 Demo Login Credentials
+## Demo Login Credentials
 
 You can log in using any of the pre-seeded accounts:
 
@@ -150,7 +150,7 @@ You can log in using any of the pre-seeded accounts:
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 ### Authentication & Profile (`/api/auth`)
 - `POST /api/auth/register` - Register a new student account (supports profile picture upload)
@@ -182,7 +182,7 @@ You can log in using any of the pre-seeded accounts:
 
 ---
 
-## 🧠 Lessons Learned
+## Lessons Learned
 
 - **Token Persistence & Refresh**: Implemented JWT authentication stored in `localStorage` with Axios interceptors to automatically attach bearer tokens to API calls.
 - **File Upload Handling**: Configured Multer middleware to handle multipart form data safely for both PDFs and images, saving assets to designated server directories.
@@ -191,6 +191,6 @@ You can log in using any of the pre-seeded accounts:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
