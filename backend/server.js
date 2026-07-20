@@ -8,15 +8,32 @@ const connectDB = require('./config/db');
 // Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
-connectDB();
-
 const app = express();
 
-// Middlewares
+// Middleware: DB Connection & Body Parsing
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+  } catch (err) {
+    console.error('Middleware DB Connection Error:', err.message);
+  }
+  next();
+});
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health Check Endpoint
+app.get('/api/health', (req, res) => {
+  const mongoose = require('mongoose');
+  res.json({
+    success: true,
+    status: 'healthy',
+    dbState: mongoose.connection.readyState,
+    hasMongoUri: !!process.env.MONGO_URI,
+    mongoHost: process.env.MONGO_URI ? process.env.MONGO_URI.split('@')[1] : null,
+  });
+});
 
 // Serve static uploads without stale browser caching
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
@@ -28,9 +45,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
 // Ensure directories exist on startup
 const uploadFolders = ['profiles', 'books', 'banners', 'notes', 'general'];
 uploadFolders.forEach((folder) => {
-  const dir = path.join(__dirname, 'uploads', folder);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  try {
+    const dir = path.join(__dirname, 'uploads', folder);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  } catch (err) {
+    // Read-only filesystem in serverless cloud environments
   }
 });
 
@@ -130,6 +151,10 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  });
+}
+
+module.exports = app;

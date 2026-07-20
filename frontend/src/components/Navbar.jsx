@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { useNotifications } from '../context/NotificationContext';
 import { MagnifyingGlass, Bell, SignOut, User, List, ShieldWarning, SquaresFour } from '@phosphor-icons/react';
+import { getImageUrl } from '../utils/imageHelper';
 import './Navbar.css';
 
 const Navbar = ({ onToggleSidebar }) => {
@@ -144,7 +145,7 @@ const Navbar = ({ onToggleSidebar }) => {
         <div className="nav-profile" ref={profileRef}>
           <div className="nav-profile-trigger" onClick={() => setShowProfileMenu(!showProfileMenu)}>
             <img
-              src={user?.profilePic ? user.profilePic : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user?.name || 'CC')}`}
+              src={user?.profilePic ? getImageUrl(user.profilePic) : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user?.name || 'CC')}`}
               alt={user?.name}
               className="nav-avatar"
             />

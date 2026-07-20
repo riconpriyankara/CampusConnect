@@ -6,6 +6,14 @@ A MERN stack web application built to help college students share course notes, 
 
 ---
 
+## Live Demo
+
+- **Frontend Application**: [https://frontend-seven-liard-28.vercel.app](https://frontend-seven-liard-28.vercel.app)
+- **Backend API**: [https://backend-flax-six-39.vercel.app](https://backend-flax-six-39.vercel.app)
+- **Database**: MongoDB Atlas (Cloud Hosted)
+
+---
+
 ## About The Project
 
 During college, notes and study materials are often scattered across WhatsApp groups, finding second-hand textbooks from seniors is messy, and course questions get lost in long chat threads. 

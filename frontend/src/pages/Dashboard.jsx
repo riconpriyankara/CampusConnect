@@ -18,6 +18,7 @@ import {
   GraduationCap
 } from '@phosphor-icons/react';
 import { getDeptCode } from '../utils/deptHelper';
+import { getImageUrl } from '../utils/imageHelper';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -78,7 +79,7 @@ const Dashboard = () => {
       const res = await api.post(`/api/notes/${noteId}/download`);
       if (res.data.success) {
         const link = document.createElement('a');
-        link.href = fileUrl;
+        link.href = getImageUrl(fileUrl);
         link.setAttribute('download', fileUrl.split('/').pop());
         document.body.appendChild(link);
         link.click();
@@ -207,7 +208,7 @@ const Dashboard = () => {
                 events.map((event) => (
                   <div key={event._id} className="event-banner-card" onClick={() => navigate('/events')}>
                     <img
-                      src={event.bannerUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300'}
+                      src={getImageUrl(event.bannerUrl, 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300')}
                       alt={event.title}
                       className="event-banner-img"
                     />
@@ -273,7 +274,7 @@ const Dashboard = () => {
                     <div className="note-card-footer">
                       <div className="note-uploader-info">
                         <img
-                          src={note.uploadedBy?.profilePic ? note.uploadedBy.profilePic : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(note.uploadedBy?.name || 'CC')}`}
+                          src={note.uploadedBy?.profilePic ? getImageUrl(note.uploadedBy.profilePic) : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(note.uploadedBy?.name || 'CC')}`}
                           alt={note.uploadedBy?.name}
                           className="note-uploader-avatar"
                           onError={(e) => {
@@ -320,7 +321,7 @@ const Dashboard = () => {
                   <div key={doubt._id} className="doubt-row-card" onClick={() => navigate(`/doubts?id=${doubt._id}`)}>
                     <div className="doubt-author-avatar-col">
                       <img
-                        src={doubt.author?.profilePic ? doubt.author.profilePic : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(doubt.author?.name || 'CC')}`}
+                        src={doubt.author?.profilePic ? getImageUrl(doubt.author.profilePic) : `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(doubt.author?.name || 'CC')}`}
                         alt={doubt.author?.name}
                         className="doubt-author-avatar"
                         onError={(e) => {
@@ -389,7 +390,7 @@ const Dashboard = () => {
                 books.map((book) => (
                   <div key={book._id} className="book-mini-card" onClick={() => navigate('/books')}>
                     <img
-                      src={book.imageUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150'}
+                      src={getImageUrl(book.imageUrl, 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150')}
                       alt={book.title}
                       className="book-mini-img"
                     />

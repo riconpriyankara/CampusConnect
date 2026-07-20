@@ -18,11 +18,15 @@ const storage = multer.diskStorage({
       folder = 'notes';
     }
 
-    const dir = path.join(__dirname, `../uploads/${folder}`);
+    let dir = path.join(__dirname, `../uploads/${folder}`);
     
-    // Ensure directory exists
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+    // Ensure directory exists, fallback to /tmp if read-only filesystem
+    try {
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+    } catch (err) {
+      dir = '/tmp';
     }
     
     cb(null, dir);

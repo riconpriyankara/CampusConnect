@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '', // Requests will go to Vite proxy during dev, and direct path in prod
+  baseURL: import.meta.env.VITE_API_BASE_URL || '',
 });
 
 // Request Interceptor: Attach JWT Token
