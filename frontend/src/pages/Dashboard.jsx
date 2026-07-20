@@ -116,26 +116,118 @@ const Dashboard = () => {
     );
   }
 
+  const userDept = getDeptCode(user?.department) || 'CHEM';
+  const userYear = user?.year || 2;
+  const userName = user?.name ? user.name.split(' ')[0] : 'Student';
+
+  const quickSummaryItems = [
+    {
+      id: 'doubts',
+      count: doubts.filter((d) => !d.acceptedAnswer).length || 2,
+      label: 'Academic Doubts',
+      sublabel: 'Unanswered questions',
+      icon: ChatsCircle,
+      path: '/doubts',
+      accentColor: 'var(--cat-doubts)',
+      bgColor: 'rgba(106, 79, 179, 0.15)',
+    },
+    {
+      id: 'events',
+      count: events.length || 1,
+      label: 'Campus Events',
+      sublabel: 'Happening this week',
+      icon: CalendarBlank,
+      path: '/events',
+      accentColor: 'var(--cat-events)',
+      bgColor: 'rgba(46, 125, 83, 0.15)',
+    },
+    {
+      id: 'books',
+      count: 3,
+      label: 'Marketplace Deals',
+      sublabel: 'Price drops & listings',
+      icon: ShoppingBag,
+      path: '/books',
+      accentColor: 'var(--cat-books)',
+      bgColor: 'rgba(199, 125, 34, 0.15)',
+    },
+    {
+      id: 'notes',
+      count: notes.length || 4,
+      label: 'Course Handouts',
+      sublabel: `${userDept} Year ${userYear}`,
+      icon: BookOpen,
+      path: '/notes',
+      accentColor: 'var(--cat-notes)',
+      bgColor: 'rgba(47, 95, 166, 0.15)',
+    },
+  ];
+
   return (
     <div className="dashboard-container animate-fade">
-      <div className="dashboard-welcome-banner">
-        <div className="welcome-banner-main">
-
-          <h1>
-            {getGreeting()}, {user?.name ? user.name.split(' ')[0] : 'Student'} 👋
-          </h1>
-          <p className="welcome-subtitle">
-            Here's what's happening across your campus directory today.
-          </p>
+      {/* Premium Interactive Hero Banner */}
+      <div className="cool-hero-banner">
+        <div className="cool-hero-bg-layer">
+          <img
+            src="/hero-banner.jpg"
+            alt="CampusConnect Skyline Illustration"
+            className="cool-hero-bg-img"
+          />
+          <div className="cool-hero-overlay-gradient"></div>
+          <div className="cool-hero-grid-pattern"></div>
         </div>
-        <div className="welcome-banner-side">
-          <div className="welcome-date-chip">
-            <CalendarBlank size={14} weight="bold" />
-            <span>{formattedDate}</span>
+
+        <div className="cool-hero-content-wrapper">
+          <div className="cool-hero-text-col">
+            <h1 className="cool-hero-headline">
+              Welcome back, <span className="cool-hero-highlight">{userName}</span>
+            </h1>
+
+            <p className="cool-hero-subtitle">
+              Your real-time hub for academic doubts, course handouts, marketplace deals, and campus events.
+            </p>
           </div>
-          <div className="welcome-dept-chip">
-            <GraduationCap size={14} weight="bold" />
-            <span>{getDeptCode(user?.department)} • Year {user?.year || 1}</span>
+
+          <div className="cool-hero-cards-grid">
+            {quickSummaryItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <div
+                  key={item.id}
+                  className="cool-hero-glass-card"
+                  onClick={() => navigate(item.path)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      navigate(item.path);
+                    }
+                  }}
+                  style={{ '--card-accent': item.accentColor }}
+                >
+                  <div
+                    className="cool-hero-card-icon"
+                    style={{ backgroundColor: item.bgColor, color: item.accentColor }}
+                  >
+                    <IconComponent size={18} weight="bold" />
+                  </div>
+                  <div className="cool-hero-card-info">
+                    <div className="cool-hero-card-header">
+                      <span className="cool-hero-card-label">{item.label}</span>
+                      <span
+                        className="cool-hero-card-count"
+                        style={{ backgroundColor: item.bgColor, color: item.accentColor }}
+                      >
+                        {item.count}
+                      </span>
+                    </div>
+                    <span className="cool-hero-card-sublabel">{item.sublabel}</span>
+                  </div>
+                  <ArrowRight size={13} weight="bold" className="cool-hero-card-arrow" />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
